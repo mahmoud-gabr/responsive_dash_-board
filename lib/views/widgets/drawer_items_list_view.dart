@@ -13,7 +13,7 @@ class DrawerItemsListView extends StatefulWidget {
 }
 
 class _DrawerItemsListViewState extends State<DrawerItemsListView> {
-   int activeIndex = 0;
+  int activeIndex = 0;
   final List<DrawerItemModel> items = [
     const DrawerItemModel(title: 'Dashboard', icon: Assets.imagesDashboard),
     const DrawerItemModel(
@@ -31,11 +31,18 @@ class _DrawerItemsListViewState extends State<DrawerItemsListView> {
       itemCount: items.length,
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            if (activeIndex != index) {
+              setState(() {
+                activeIndex = index;
+              });
+            }
+          },
           child: Padding(
             padding: const EdgeInsets.only(top: 20),
             child: DrawerItem(
               drawerItemModel: items[index],
+              isActive: activeIndex == index,
             ),
           ),
         );
